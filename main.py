@@ -450,7 +450,7 @@ def auto_run(data: AutoRequest):
     cron_expression = f"{minute} {hour} * * *"
 
     easycron_payload = {
-        "url": f"https://fastapi-app-production-1c05.up.railway.app/{data.action}",
+        "url": f"https://fastapi-app-production-cff4.up.railway.app/{data.action}",
         "cron_expression": cron_expression,
         "timezone_from": 2,
         "timezone": "Asia/Kolkata",
