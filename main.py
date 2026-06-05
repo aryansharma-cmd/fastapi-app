@@ -461,7 +461,7 @@ def auto_run(data: AutoRequest):
     }
 
     easycron_headers = {
-        "X-API-Key": "44ec89d1eb10cc0022c117eaf2c4f63e",
+        "X-API-Key": "29c336688ff37bfa5a9202c6a9dbcdfa",
         "Content-Type": "application/json"
     }
 
@@ -480,7 +480,7 @@ def auto_run(data: AutoRequest):
 @app.get("/cron-jobs")
 def list_cron_jobs():
     easycron_headers = {
-        "X-API-Key": "44ec89d1eb10cc0022c117eaf2c4f63e",
+        "X-API-Key": "29c336688ff37bfa5a9202c6a9dbcdfa",
         "Content-Type": "application/json"
     }
     response = requests.get(
@@ -494,7 +494,7 @@ def list_cron_jobs():
 @app.delete("/cron-jobs/{cron_job_id}")
 def delete_cron_job(cron_job_id: int):
     easycron_headers = {
-        "X-API-Key": "44ec89d1eb10cc0022c117eaf2c4f63e",
+        "X-API-Key": "29c336688ff37bfa5a9202c6a9dbcdfa",
         "Content-Type": "application/json"
     }
     response = requests.delete(
