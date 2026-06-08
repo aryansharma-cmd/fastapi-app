@@ -132,7 +132,6 @@ def report_build():
 def camps_extraction(report):
     for data in report['rows']:
         active_camps.append(data['campaign_id'])
-    print(f"Active Camps:{len(active_camps)}")
 
 def fetch_streams(camp):
         report_url = f'{base_url}/campaigns/{camp}/streams'
@@ -150,7 +149,6 @@ def filter_streams(streams, act):
                             filtered_streams.append(stream)
                 elif act == 'add':
                     campaign_id = stream['campaign_id']
-                    print(campaign_id)
                     if add_camps == 'Specific':
                         for id in specific_camps:
                             if  campaign_id == int(id):
@@ -181,8 +179,6 @@ def weight_update(stream):
 
 
 def stream_change(filter, act):
-    print('in stream_change')
-    print(act)
     for stream in filter:
         already_exist = False
         # stream.pop('id')
@@ -257,10 +253,9 @@ def stream_change_add(camps, prev, land):
 def stream_update(final_stream):
     for stream in final_stream:
         updated_payload = json.dumps(stream)
-        print(updated_payload)
         response = requests.put(f'{base_url}/streams/{stream["id"]}', data=updated_payload, headers=api_headers)
 
-        print(response)
+        print(response.text)
 
 
 # report_filters(filters_include, filters_exclude)
@@ -306,7 +301,10 @@ def run(data: RequestData):
     action = 'remove'
 
     old_landing = data.old_landing
+    print(f'Old Landing: {old_landing}')
     new_landing = data.new_landing
+    print(f'New Landing: {new_landing}')
+
 
     # add_camps = data.add_camps
     # specific_camps = data.specific_camps or []
@@ -316,7 +314,6 @@ def run(data: RequestData):
     # 🔥 EXACT SAME FLOW (copied, not changed)
 
     report_filters(filters_include, filters_exclude)
-    print(report_payload)
     report_build()
 
     with ThreadPoolExecutor(max_workers=10) as executor:
@@ -351,11 +348,15 @@ def run(data: RequestData):
     # global add_camps, specific_camps, remove_previous, add_landings
 
     filters_include = data.filters_include
+    print(f'filters_include: {filters_include}')
     filters_exclude = data.filters_exclude
+    print(f'filters_exclude: {filters_exclude}')
     action = 'replace'
 
     old_landing = data.old_landing
+    print(f'Old Landing: {old_landing}')
     new_landing = data.new_landing
+    print(f'New Landing: {new_landing}')
 
     # add_camps = data.add_camps
     # specific_camps = data.specific_camps or []
@@ -399,16 +400,22 @@ def run(data: RequestDataAdd):
     global add_camps, specific_camps, remove_previous, add_landings
 
     filters_include = data.filters_include
+    print(f'filters_include: {filters_include}')
     filters_exclude = data.filters_exclude
+    print(f'filters_exclude: {filters_exclude}')
     action = 'add'
 
     # old_landing = data.old_landing
     # new_landing = data.new_landing
 
     add_camps = data.add_camps
+    print(f'Add Camps: {add_camps}')
     specific_camps = data.specific_camps or []
+    print(f'Specific Camps: {specific_camps}')
     remove_previous = data.remove_previous
+    print(f'Remove Prev: {remove_previous}')
     add_landings = data.add_landings or []
+    print(f'Add Landing: {add_landings}')
 
     # 🔥 EXACT SAME FLOW (copied, not changed)
 
